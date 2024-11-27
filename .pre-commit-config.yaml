@@ -1,0 +1,45 @@
+---
+default_install_hook_types:
+  - pre-commit
+  - pre-push
+
+repos:
+  - repo: local
+    hooks:
+      - id: tests
+        stages: [ pre-push ]
+        language: system
+        name: tests
+        pass_filenames: false
+        entry: pytest -vv
+
+  - repo: git@git.appkode.ru:backend/python/kode-python-pre-commit-hooks.git
+    rev: 'v0.6.0'
+    hooks:
+      - id: black
+      - id: isort
+      - id: ruff
+      - id: mypy
+      - id: bandit
+      - id: poetry-check
+
+  #      - id: safety3-poetry
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 'v4.6.0'
+    hooks:
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: detect-private-key
+      - id: check-json
+      - id: check-toml
+      - id: check-yaml
+      - id: double-quote-string-fixer
+      - id: end-of-file-fixer
+      - id: name-tests-test
+        files: ^(tests)/.+\.py$
+        exclude: ^(tests).+(mock|util|constant|fixtur).*(\.py)$
+        args:
+          - '--pytest-test-first'
+      - id: trailing-whitespace
+        exclude: ^.+(\.md)$
