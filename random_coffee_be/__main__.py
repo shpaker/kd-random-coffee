@@ -1,17 +1,7 @@
-from typing import Union
+from random_coffee_be.main import make_app
 import uvicorn
-from fastapi import FastAPI
-
-app = FastAPI()
 
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
-
-uvicorn.run(app)
+if __name__ == '__main__':
+    app = make_app()
+    uvicorn.run(app)

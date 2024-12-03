@@ -6,6 +6,7 @@ from fastapi import FastAPI
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 
+from random_coffee_be.transports.views.clubs.views import clubs_router
 from random_coffee_be.transports.views.common.views import common_router
 from random_coffee_be.transports.views.users.views import users_router
 
@@ -41,7 +42,6 @@ def make_app() -> FastAPI:
     )
     app.include_router(common_router)
     app.include_router(users_router)
+    app.include_router(clubs_router)
     return app
 
-# Создание и запуск приложения
-app = make_app()
