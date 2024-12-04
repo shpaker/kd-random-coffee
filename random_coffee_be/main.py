@@ -7,8 +7,15 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-from .transports.common.views import common_router
-from .views.users_views import users_router
+from .transports.views.common.views import common_router
+from .transports.views.users.users_views import users_router
+
+from .models.user_manager import UserManager
+from .config import TOKEN, MODER, MODER_1
+
+if __name__ == "__main__":
+    user_manager = UserManager()
+    print("Loaded users: ", user_manager.users)
 
 # Настройки базы данных
 DATABASE_URL = "postgresql+asyncpg://luch1x:Fq12Ww@localhost:5432/KODE-practice"
