@@ -1,7 +1,20 @@
-from random_coffee_be.main import make_app
-import uvicorn
+from typing import Union
+from fastapi import FastAPI
+
+app = FastAPI()
 
 
-if __name__ == '__main__':
-    app = make_app()
-    uvicorn.run(app)
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+
+
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: Union[str, None] = None):
+    return {"item_id": item_id, "q": q}
+
+
+if __name__ == "__main__":
+    # Запускаем сервер Uvicorn только при непосредственном запуске этого файла
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
