@@ -1,25 +1,18 @@
-from typing import Annotated, Any
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.orm import sessionmaker
+from .settings import get_app_settings
+from typing import AsyncGenerator
 
-from fastapi import Request
-from fastapi.params import Depends
+settings = get_app_settings()
 
-from random_coffee_be.integrations.participation_repo import ParticipationRepo
-from random_coffee_be.integrations.users_repo import UsersRepo
+engine = create_async_engine(settings.database_url, echo=True)
+async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
-
-def get_db_depends(
-    request: Request,
-):
-    return request.state.db_engine
-
-
-def get_users_repo(
-    db_engine: Annotated[Any, Depends(get_db_depends)],
-) -> UsersRepo:
-    return UsersRepo(db_engine)
-
-
-def get_participation_repo(
-    db_engine: Annotated[Any, Depends(get_db_depends)],
-) -> ParticipationRepo:
-    return ParticipationRepo(db_engine)
+async def get_db() -> AsyncGenerator[AsyncSession, None]:
+    """Асинхронный генератор для получения сессии базы данных."""
+    try:
+        async with async_session() as session:
+            yield session
+    except Exception as e:
+        # Обрабатываем возможные исключения
+        raise e
