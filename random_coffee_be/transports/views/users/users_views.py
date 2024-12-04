@@ -3,8 +3,8 @@ from pydantic import BaseModel
 from typing import List
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, insert, update, delete
-from ..models.user import User
-from ..depends import get_db
+from models.user import User
+from depends import get_db
 
 router = APIRouter()
 
@@ -18,6 +18,16 @@ class UserResponse(BaseModel):
     name: str
     ready_status: bool
     clubs: List[str]
+
+class UserStates:
+    INIT = "INIT"
+    WAITING_NAME = "WAITING_NAME"
+    EMAIL_SENT = "EMAIL_SENT"
+    WAITING_MODERATION = "WAITING_MODERATION"
+    ONBOARDING = "ONBOARDING"
+    READY_STATUS = "READY_STATUS"
+    CLUBS = "CLUBS"
+    CREATE_MEETING = "CREATE_MEETING"
 
 @router.get("/user/{user_id}", response_model=UserResponse)
 async def get_user(user_id: int, db: AsyncSession = Depends(get_db)):
