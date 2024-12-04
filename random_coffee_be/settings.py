@@ -4,13 +4,10 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from kd_random_coffee_utils.types import AppEnvironments
 
-MODEL_CONFIG = SettingsConfigDict(
-    case_sensitive=False,
-    env_prefix="kd_",
-    env_file=".env",
-)
 
-class AppSettings(BaseSettings):
+class AppSettings(
+    BaseSettings,
+):
     database_url: str
     jwt_secret_key: str
     jwt_expiration: int
@@ -23,23 +20,33 @@ class AppSettings(BaseSettings):
     email_password: str
     external_api_base_url: str
     external_api_token: str
-    
-    model_config = MODEL_CONFIG
+
+    model_config = SettingsConfigDict(
+        case_sensitive=False,
+        env_prefix="kd_",
+        env_file=".env",
+    )
 
 
-class EnvSettings(BaseSettings):
+class EnvSettings(
+    BaseSettings,
+):
     app_environment: AppEnvironments
     app_version: str
 
-    model_config = MODEL_CONFIG
+    model_config = SettingsConfigDict(
+        case_sensitive=False,
+        env_prefix="kd_",
+        env_file=".env",
+    )
 
 
-@lru_cache(maxsize=None)
+@lru_cache
 def get_app_settings() -> AppSettings:
     return AppSettings()
 
 
-@lru_cache(maxsize=None)
+@lru_cache
 def get_env_settings() -> EnvSettings:
     return EnvSettings()
 # Класс AppSettings - создается класс, к нему импортируется BaseSettings, а он уже определяет настройки, связанные с приложением.
