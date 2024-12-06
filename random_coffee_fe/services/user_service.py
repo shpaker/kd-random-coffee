@@ -2,7 +2,7 @@ from models.user_manager import UserManager
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 from config import MODER, MODER_1
 import random
-from models.user import UserStates
+from models.user import UserStates, User
 
 user_manager = UserManager()
 
@@ -20,7 +20,7 @@ async def handle_start(message_text, chat_id):
         return "Привет! Добро пожаловать в Random Coffee V1 Students Edition! Отправьте ваше имя."
     else:
         return "Нажмите кнопку НАЧАТЬ, чтобы продолжить."
-
+   
 async def handle_name(name, chat_id):
     user = user_manager.get_user(chat_id)
     user.name = name

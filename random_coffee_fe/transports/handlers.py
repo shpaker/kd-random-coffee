@@ -1,6 +1,6 @@
 import config
 from aiogram import types
-from telegram import dp, bot
+from intagrations.telegram import dp, bot
 from models.user import UserStates
 from services.user_service import (
     get_club_keyboard, send_welcome, handle_start, handle_name, handle_moderation_approval,
@@ -28,7 +28,7 @@ async def handle_name_message(message: types.Message):
     await bot.send_message(message.chat.id, response)
     await bot.send_message(config.MODER, f"Новый запрос на регистрацию от пользователя с именем: {message.text}. Подтвердите или отклоните.")
     await bot.send_message(config.MODER_1, f"Новый запрос на регистрацию от пользователя с именем: {message.text}. Подтвердите или отклоните.")
-
+    
 @dp.message_handler(lambda message: user_manager.get_user(message.chat.id).state == UserStates.EMAIL_SENT)
 async def handle_moderation_approval_message(message: types.Message):
     response, approved = await handle_moderation_approval(message.chat.id)
