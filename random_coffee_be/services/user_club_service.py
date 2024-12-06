@@ -1,18 +1,11 @@
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, insert, delete
-from ..models.user_clubs import UserClub 
+from random_coffee_be_versia10.repositories.user_club_repository import UserClubRepository
 
 class UserClubService:
-    def __init__(self, db: AsyncSession):
-        self.db = db
+    def __init__(self, user_club_repository: UserClubRepository):
+        self.user_club_repository = user_club_repository
 
-    async def join_club(self, user_id: int, club_id: id):
-        query = insert(UserClub).values(user_id = user_id, club_id = club_id)
-        await self.db.execute(query)
-        await self.db.commit()
+    async def join_club(self, user_id: int, club_id: int):
+        await self.user_club_repository.join_club(user_id, club_id)
 
     async def leave_club(self, user_id: int, club_id: int):
-        query = delete(UserClub).where(UserClub.user_id == user_id, UserClub.club_id == club_id)
-        await self.db.execute(query)
-        await self.db.commit()
-#Создаем модель уже существующей таблицы в базе данных Docker
+        await self.user_club_repository.leave_club(user_id, club_id)

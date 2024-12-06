@@ -1,4 +1,4 @@
-from models.user import User
+from random_coffee_be_versia10.models.user import User
 
 class UserManager:
     def init(self):
