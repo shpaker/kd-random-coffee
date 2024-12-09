@@ -1,3 +1,5 @@
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, Message
+
 import config
 from aiogram import types
 from intagrations.telegram import dp, bot
@@ -12,23 +14,34 @@ from models.user_manager import UserManager
 
 user_manager = UserManager()
 
+
 @dp.message_handler(commands=['start'])
 async def start_command(message: types.Message):
-    text, keyboard = await send_welcome(message.chat.id)
-    await bot.send_message(message.chat.id, text, reply_markup=keyboard)
+    user = user_manager.get_user(message.chat.id)
+    user.state = UserStates.INIT
+    keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add(KeyboardButton("НАЧАТЬ"))
+    await bot.send_message(message.chat.id, "Нажмите кнопку ниже, чтобы начать:", reply_markup=keyboard)
 
 @dp.message_handler(lambda message: user_manager.get_user(message.chat.id).state == UserStates.INIT)
 async def handle_start_message(message: types.Message):
-    response = await handle_start(message.text, message.chat.id)
-    await bot.send_message(message.chat.id, response)
+    if message.text == "НАЧАТЬ":
+        user = user_manager.get_user(message.chat.id)
+        user.state = UserStates.WAITING_NAME
+        await bot.send_message(message.chat.id, "Привет! Добро пожаловать в Random Coffee V1 Students Edition! Отправьте ваше имя.")
+        return
+    else:
+        await bot.send_message(message.chat.id, "Нажмите кнопку НАЧАТЬ, чтобы продолжить.")
 
 @dp.message_handler(lambda message: user_manager.get_user(message.chat.id).state == UserStates.WAITING_NAME)
 async def handle_name_message(message: types.Message):
-    response = await handle_name(message.text, message.chat.id)
-    await bot.send_message(message.chat.id, response)
+    user = user_manager.get_user(message.chat.id)
+    user.name = message.text
+    user.state = UserStates.EMAIL_SENT
+    await bot.send_message(message.chat.id, f"💌{message.text} Теперь твой запрос на регистрацию отправлен модератору.\nКак только он его одобрит, ты получишь уведомление.")
     await bot.send_message(config.MODER, f"Новый запрос на регистрацию от пользователя с именем: {message.text}. Подтвердите или отклоните.")
     await bot.send_message(config.MODER_1, f"Новый запрос на регистрацию от пользователя с именем: {message.text}. Подтвердите или отклоните.")
-    
+
 @dp.message_handler(lambda message: user_manager.get_user(message.chat.id).state == UserStates.EMAIL_SENT)
 async def handle_moderation_approval_message(message: types.Message):
     response, approved = await handle_moderation_approval(message.chat.id)
