@@ -30,3 +30,12 @@ async def create_user(user: UserCreate, db=Depends(get_db)):
     except Exception as e:
         logger.error(f"Error creating user: {e}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
+    
+@users_router.delete("/user/{user_id}", response_model=dict)
+async def delete_user(user_id: int, db=Depends(get_db)):
+    user_repository = UserRepository(db)
+    user = await user_repository.get_user_by_id(user_id)
+    if user is None:
+        raise HTTPException(status_code=404, detail="Полльзователь не найден")
+    await user_repository.delete_user(user_id)
+    return {"detail": "Пользователь удален"}
