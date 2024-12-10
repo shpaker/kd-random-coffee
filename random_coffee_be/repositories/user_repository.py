@@ -1,5 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
+from sqlalchemy import delete
 from random_coffee_be_versia10.models.user import User
 import logging
 
@@ -28,3 +29,8 @@ class UserRepository:
         except Exception as e:
             logger.error(f"Error creating user: {e}")
             raise
+    
+    async def delete_user(self, user_id: int):
+        query = delete(User).where(User.id == user_id)
+        await self.db.execute(query)
+        await self.db.commit()
