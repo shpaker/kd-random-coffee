@@ -2,8 +2,8 @@ from pydantic import BaseModel, validator
 from datetime import datetime
 from typing import List
 from fastapi import HTTPException
-from random_coffee_be_versia10.repositories.user_repository import UserRepository
-from random_coffee_be_versia10.models.user import User
+from random_coffee_be.repositories.user_repository import UserRepository
+from random_coffee_be.models.user import User
 
 class UserCreate(BaseModel):
     id: int

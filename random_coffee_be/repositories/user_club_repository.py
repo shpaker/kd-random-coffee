@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, insert, delete
-from random_coffee_be_versia10.models.user_clubs import UserClubs
+from random_coffee_be.models.user_clubs import UserClubs
 
 class UserClubRepository:
     def __init__(self, db: AsyncSession):

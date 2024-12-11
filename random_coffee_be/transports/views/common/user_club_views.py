@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from random_coffee_be_versia10.depends import get_db
-from random_coffee_be_versia10.services.user_club_service import UserClubService
-from random_coffee_be_versia10.repositories.user_club_repository import UserClubRepository
+from random_coffee_be.depends import get_db
+from random_coffee_be.services.user_club_service import UserClubService
+from random_coffee_be.repositories.user_club_repository import UserClubRepository
 
 user_club_router = APIRouter()
 

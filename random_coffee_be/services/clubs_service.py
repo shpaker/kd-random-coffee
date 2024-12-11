@@ -1,8 +1,8 @@
 from fastapi import HTTPException
 from typing import List
-from random_coffee_be_versia10.repositories.club_repository import ClubRepository
-from random_coffee_be_versia10.services.club_groups import club_groups
-from random_coffee_be_versia10.models.club import Club
+from random_coffee_be.repositories.club_repository import ClubRepository
+from random_coffee_be.services.club_groups import club_groups
+from random_coffee_be.models.club import Club
 from datetime import datetime
 
 class ClubService:

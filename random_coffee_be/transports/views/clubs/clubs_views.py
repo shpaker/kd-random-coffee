@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from typing import List
-from random_coffee_be_versia10.services.clubs_service import ClubService
-from random_coffee_be_versia10.repositories.club_repository import ClubRepository
-from random_coffee_be_versia10.depends import get_db
+from random_coffee_be.services.clubs_service import ClubService
+from random_coffee_be.repositories.club_repository import ClubRepository
+from random_coffee_be.depends import get_db
 
 clubs_router = APIRouter()
 

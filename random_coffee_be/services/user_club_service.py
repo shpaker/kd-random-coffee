@@ -1,4 +1,4 @@
-from random_coffee_be_versia10.repositories.user_club_repository import UserClubRepository
+from random_coffee_be.repositories.user_club_repository import UserClubRepository
 
 class UserClubService:
     def __init__(self, user_club_repository: UserClubRepository):

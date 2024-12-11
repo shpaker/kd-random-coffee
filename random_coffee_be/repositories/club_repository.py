@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, update
-from random_coffee_be_versia10.models.user import User
-from random_coffee_be_versia10.models.club import Club
+from random_coffee_be.models.user import User
+from random_coffee_be.models.club import Club
 
 class ClubRepository:
     def __init__(self, db: AsyncSession):

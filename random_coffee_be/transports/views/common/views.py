@@ -3,7 +3,7 @@ from typing import Annotated, Any
 from fastapi import APIRouter
 from fastapi.params import Depends
 
-from random_coffee_be_versia10.settings import EnvSettings, get_env_settings
+from random_coffee_be.settings import EnvSettings, get_env_settings
 
 common_router = APIRouter()
 

@@ -1,13 +1,13 @@
 #создаю словарь club_groups, который будет импортроваться модулем в файл club_service
 club_groups = {
-    "Dota 2": "4725765344",
-    "CS2": "4618803213",
-    "Genshin Impact": "4708638854",
-    "HonkaiStarRail": "4682949218",
-    "Tet-a-tet": "4779529846",
-    "ZZZ": "4711328049",
-    "Valorant": "4666934185",
-    "Mobile Legends": "4626375515",
-    "ToF": "4747030205",
-    "WutheringWaves": "4642309131"
+    "Dota 2": "https://t.me/+q0J9LS1G9xxhMzcy",
+    "CS2": "https://t.me/+toxDOhSP5XQxZjMy",
+    "Genshin Impact": "https://t.me/+JqmPPKrE35w3Mzhi",
+    "HonkaiStarRail": "https://t.me/+v3ytklcUvP5iM2Iy",
+    "Tet-a-tet": "https://t.me/+bewJBTu4-H45Zjli",
+    "ZZZ": "https://t.me/+xqSB2oS8aakwZTQy",
+    "Valorant": "https://t.me/+xqSB2oS8aakwZTQy",
+    "Mobile Legends": "https://t.me/+apjPJReSW2owZTQy",
+    "ToF": "https://t.me/+w0NMyZFMlE4xYmIy",
+    "WutheringWaves": "https://t.me/+soQdt9N-s-pkYTFi"
 }

@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy import delete
-from random_coffee_be_versia10.models.user import User
+from random_coffee_be.models.user import User
 import logging
 
 # Настройка логирования

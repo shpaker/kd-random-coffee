@@ -1,6 +1,6 @@
 import requests
 
-from random_coffee_be_versia10.settings import get_app_settings
+from random_coffee_be.settings import get_app_settings
 
 settings = get_app_settings()
 

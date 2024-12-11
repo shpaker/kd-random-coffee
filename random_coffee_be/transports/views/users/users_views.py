@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from typing import List
-from random_coffee_be_versia10.services.users_service import UserService, UserCreate, UserResponse
-from random_coffee_be_versia10.repositories.user_repository import UserRepository
-from random_coffee_be_versia10.depends import get_db
+from random_coffee_be.services.users_service import UserService, UserCreate, UserResponse
+from random_coffee_be.repositories.user_repository import UserRepository
+from random_coffee_be.depends import get_db
 import logging
 
 # Настройка логирования

@@ -6,13 +6,13 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-from random_coffee_be_versia10.transports.views.common.views import common_router
-from random_coffee_be_versia10.transports.views.users.users_views import users_router
-from random_coffee_be_versia10.transports.views.clubs.clubs_views import clubs_router
-from random_coffee_be_versia10.transports.views.common.user_club_views import user_club_router
+from random_coffee_be.transports.views.common.views import common_router
+from random_coffee_be.transports.views.users.users_views import users_router
+from random_coffee_be.transports.views.clubs.clubs_views import clubs_router
+from random_coffee_be.transports.views.common.user_club_views import user_club_router
 
-from random_coffee_be_versia10.models.user_manager import UserManager
-from random_coffee_be_versia10.config import TOKEN, MODER, MODER_1
+from random_coffee_be.models.user_manager import UserManager
+from random_coffee_be.config import TOKEN, MODER, MODER_1
 
 import logging
 
